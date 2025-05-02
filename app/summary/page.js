@@ -17,6 +17,7 @@ async function page() {
         <thead className="bg-gray-100">
           <tr>
             <th className="px-4 py-2 text-left">Name</th>
+            <th className="px-4 py-2 text-left">Location</th>
             <th className="px-4 py-2 text-left">Total</th>
             <th className="px-4 py-2 text-left">Used</th>
             <th className="px-4 py-2 text-left">Remaining</th>
@@ -29,6 +30,7 @@ async function page() {
               className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
             >
               <td className="px-4 py-2">{item.Name}</td>
+              <td className="px-4 py-2">{item.Location}</td>
               <td className="px-4 py-2">{item.StockCount}</td>
               <td className="px-4 py-2">{item.UsedCount}</td>
               <td className="px-4 py-2">{item.Remaining}</td>

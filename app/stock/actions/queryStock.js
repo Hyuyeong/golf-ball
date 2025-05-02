@@ -12,6 +12,7 @@ export async function createStock(formData) {
   );
 
   revalidatePath("/stock");
+  revalidatePath("/summary");
 }
 
 export const getStocks = async () => {
@@ -76,6 +77,7 @@ export async function updateStock({
     throw error;
   }
   revalidatePath("/stock");
+  revalidatePath("/summary");
 }
 
 export async function getTotalStock() {
@@ -92,4 +94,5 @@ export async function deleteStock(stockId) {
     throw new Error("Delete Fail: " + err.message);
   }
   revalidatePath("/stock");
+  revalidatePath("/summary");
 }

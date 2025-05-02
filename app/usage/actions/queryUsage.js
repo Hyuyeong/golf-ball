@@ -12,6 +12,7 @@ export async function createUsage(formData) {
   );
 
   revalidatePath("/usage");
+  revalidatePath("/summary");
 }
 
 // export const getUsages = async () => {
@@ -78,6 +79,7 @@ export async function updateUsage(formData) {
   );
 
   revalidatePath("/usage");
+  revalidatePath("/summary");
 }
 
 // export async function getStockById(id) {
@@ -139,4 +141,5 @@ export async function deleteUsage(usageId) {
     throw new Error("Delete Fail: " + err.message);
   }
   revalidatePath("/usage");
+  revalidatePath("/summary");
 }

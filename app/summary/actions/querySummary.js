@@ -6,6 +6,7 @@ export async function getSummary() {
   const sql = `SELECT 
   s.Id AS StockId,
   s.Name,
+  s.Location,
   s.Count AS StockCount,
   IFNULL(SUM(u.Count), 0) AS UsedCount,
   s.Count + IFNULL(SUM(u.Count), 0) AS Remaining
