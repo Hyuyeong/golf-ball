@@ -75,6 +75,7 @@ export async function updateStock({
     console.error("updateStock error:", error);
     throw error;
   }
+  revalidatePath("/stock");
 }
 
 export async function getTotalStock() {
@@ -90,4 +91,5 @@ export async function deleteStock(stockId) {
   } catch (err) {
     throw new Error("Delete Fail: " + err.message);
   }
+  revalidatePath("/stock");
 }

@@ -138,4 +138,5 @@ export async function deleteUsage(usageId) {
   } catch (err) {
     throw new Error("Delete Fail: " + err.message);
   }
+  revalidatePath("/usage");
 }
