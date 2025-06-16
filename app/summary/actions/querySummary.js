@@ -20,3 +20,33 @@ export async function getSummary() {
   const sumarry = await query(sql);
   return sumarry;
 }
+
+export const getMonthlyUsageCount = async () => {
+  const sql = `
+    SELECT 
+        DATE_FORMAT(u.DateCreated, '%Y-%m') AS Month,
+        SUM(u.Count) AS TotalCount,
+        COUNT(DISTINCT DATE(DateCreated)) AS CountDays
+    FROM 
+        Usages u
+    GROUP BY 
+        DATE_FORMAT(u.DateCreated, '%Y-%m')
+    ORDER BY 
+        Month
+  `;
+
+  const monthlyCounts = await query(sql);
+  return monthlyCounts;
+};
+
+export const getTotalUsageCount = async () => {
+  const sql = `
+    SELECT 
+        SUM(Count) AS TotalUsage
+    FROM 
+        Usages
+  `;
+
+  const result = await query(sql);
+  return result[0]; // { TotalUsage: number }
+};

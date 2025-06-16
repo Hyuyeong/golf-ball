@@ -40,6 +40,8 @@ export const getUsages = async () => {
         Usages u
     JOIN 
         Stocks so ON u.StockId = so.Id
+    ORDER BY 
+        u.DateCreated
       `;
 
   const usages = await query(sql);

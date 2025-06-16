@@ -1,9 +1,15 @@
-import { getSummary } from "./actions/querySummary";
+import { getMonthlyUsageCount,getTotalUsageCount,getSummary } from "./actions/querySummary";
 
 async function page() {
   const stockList = await getSummary();
 
-  console.log(stockList);
+  const monthlyCounts = await getMonthlyUsageCount();
+  
+  const totalUsage = await getTotalUsageCount();
+
+  console.log(monthlyCounts);
+  console.log(totalUsage);
+  // console.log(stockList);
 
   const totalRemaining = stockList.reduce(
     (sum, item) => sum + +item.Remaining,
@@ -41,6 +47,32 @@ async function page() {
       <h3 className="text-xl font-bold text-right mr-3">
         Total : {totalRemaining}
       </h3>
+
+      <table className="min-w-full divide-y divide-gray-200 rounded shadow">
+        <thead className="bg-gray-100">
+          <tr>
+            <th className="px-4 py-2 text-left">Month</th>
+            <th className="px-4 py-2 text-left">Count</th>
+            <th className="px-4 py-2 text-left">Balls</th>
+          </tr>
+        </thead>
+        <tbody>
+          {monthlyCounts.map((item, index) => (
+            <tr
+              key={item.Month}
+            >
+              <td className="px-4 py-2">{item.Month}</td>
+              <td className="px-4 py-2">{item.CountDays}</td>
+              <td className="px-4 py-2">{item.TotalCount}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h3 className="text-xl font-bold text-right mr-3">
+        Sum : {totalUsage.TotalUsage}
+      </h3>
+
+
     </div>
   );
 }
