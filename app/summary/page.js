@@ -3,12 +3,13 @@ import { getMonthlyUsageCount,getTotalUsageCount,getSummary } from "./actions/qu
 async function page() {
   const stockList = await getSummary();
 
-  const monthlyCounts = await getMonthlyUsageCount();
+  const monthlyResults = await getMonthlyUsageCount();
+  const totalSum = await getMonthlyUsageCount();
   
   const totalUsage = await getTotalUsageCount();
 
-  console.log(monthlyCounts);
-  console.log(totalUsage);
+  // console.log(monthlyCounts);
+  // console.log(totalUsage);
   // console.log(stockList);
 
   const totalRemaining = stockList.reduce(
@@ -52,12 +53,12 @@ async function page() {
         <thead className="bg-gray-100">
           <tr>
             <th className="px-4 py-2 text-left">Month</th>
-            <th className="px-4 py-2 text-left">Count</th>
-            <th className="px-4 py-2 text-left">Balls</th>
+            <th className="px-4 py-2 text-left">Count ({monthlyResults.totalSum})</th>
+            <th className="px-4 py-2 text-left">Balls ({totalUsage.TotalUsage})</th>
           </tr>
         </thead>
         <tbody>
-          {monthlyCounts.map((item, index) => (
+          {monthlyResults.monthlyCounts.map((item, index) => (
             <tr
               key={item.Month}
             >
@@ -68,9 +69,7 @@ async function page() {
           ))}
         </tbody>
       </table>
-      <h3 className="text-xl font-bold text-right mr-3">
-        Sum : {totalUsage.TotalUsage}
-      </h3>
+      <h3 className="text-xl font-bold text-right mr-3"></h3>
 
 
     </div>

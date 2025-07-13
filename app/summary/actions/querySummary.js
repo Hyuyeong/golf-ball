@@ -36,7 +36,11 @@ export const getMonthlyUsageCount = async () => {
   `;
 
   const monthlyCounts = await query(sql);
-  return monthlyCounts;
+  const totalSum = monthlyCounts.reduce((sum, row) => sum + Number(row.CountDays), 0);
+  return {
+    monthlyCounts,
+    totalSum
+  };
 };
 
 export const getTotalUsageCount = async () => {
